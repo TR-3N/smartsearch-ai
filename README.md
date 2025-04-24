@@ -1,5 +1,8 @@
 # 🔍 SmartSearchAI
 
+[![View App on Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://smartsearch-ai.streamlit.app/)
+
+
 SmartSearchAI is a semantic search engine powered by **SentenceTransformers** and **Streamlit**. It allows users to search through climate change-related information using natural language queries. By utilizing **semantic search**, the app finds the most relevant information based on the meaning of the query—not just keyword matches.
 
 ---
