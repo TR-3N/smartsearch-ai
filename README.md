@@ -1,122 +1,102 @@
 # 🔍 SmartSearchAI
 
-[![View App on Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://smartsearch-ai.streamlit.app/)
+SmartSearchAI is a **live semantic search engine** that lets users ask natural language questions and retrieves intelligent answers sourced directly from the internet — **no static dataset required**.
 
-
-SmartSearchAI is a semantic search engine powered by **SentenceTransformers** and **Streamlit**. It allows users to search through climate change-related information using natural language queries. By utilizing **semantic search**, the app finds the most relevant information based on the meaning of the query—not just keyword matches.
-
----
-
-## 🚀 Features
-
-- 🔍 **Semantic Search** using BERT-based embeddings.
-- 🧠 **Natural Language Query Support**.
-- 📂 **Custom Dataset Support** – plug in your own CSV.
-- 💻 **Streamlit UI** – clean, responsive, and interactive.
-- ☁️ **Easily Deployable** – works on any platform with minimal setup.
+It uses:
+- 🌐 [SerpAPI](https://serpapi.com/) to fetch real-time web results
+- 🤖 [SentenceTransformers](https://www.sbert.net/) to embed and understand natural language
+- ⚡ [FAISS](https://github.com/facebookresearch/faiss) for fast similarity search
+- 🖥️ [Streamlit](https://streamlit.io/) for an intuitive web interface
 
 ---
 
-## 📂 Project Structure
+## ✨ Features
 
-smartsearch-ai/ ├── app.py # Streamlit app entry point ├── search_engine.py # Core logic for semantic search ├── utils.py # Text cleaning and preprocessing ├── data/ │ └── climate_data.csv # Custom dataset ├── requirements.txt # Python dependencies └── README.md # You're reading it!
-
-yaml
-Copy code
-
----
-
-## 📊 Dataset
-
-The app uses a dataset stored in `data/climate_data.csv`, with the following structure:
-
-| id | title               | description                                               |
-|----|---------------------|-----------------------------------------------------------|
-| 1  | Climate Change...   | Rising sea levels, acidification, and warming...          |
-| 2  | Deforestation       | Loss of forests increases CO₂, contributing to climate...|
-| 3  | Renewable Energy    | Wind and solar reduce carbon emissions...                |
+- 🔎 Real-time search via SerpAPI (Google Search API)
+- 🧠 Semantic understanding of user queries (not just keyword matching)
+- ⚡ Fast similarity matching using FAISS
+- 📄 Clean, responsive web UI built with Streamlit
+- 🔐 API key stored securely via `.env` file
 
 ---
 
-## 🛠️ Installation
+## 📸 Demo Screenshot
 
-Follow these steps to run the app locally:
+> *(Insert a screenshot here of your Streamlit UI if you have one)*
 
-1. **Clone the repository:**
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/your-username/smartsearch-ai.git
-cd smartsearch-ai
-Create a virtual environment:
-
+git clone https://github.com/yourusername/smartsearchai.git
+cd smartsearchai
+2. Create and Activate a Virtual Environment
 bash
 Copy code
 python -m venv smartsearch_env
-Activate the environment:
-
-On Windows:
-
-bash
-Copy code
-.\smartsearch_env\Scripts\activate
-On macOS/Linux:
-
-bash
-Copy code
-source smartsearch_env/bin/activate
-Install dependencies:
-
+smartsearch_env\Scripts\activate   # On Windows
+# OR
+source smartsearch_env/bin/activate  # On Mac/Linux
+3. Install Dependencies
 bash
 Copy code
 pip install -r requirements.txt
-Run the app:
+🔑 SerpAPI Setup
+Go to https://serpapi.com/ and sign up (free plan available).
 
+Get your API key.
+
+Create a .env file in the root of the project:
+
+env
+Copy code
+SERPAPI_API_KEY=your_serpapi_key_here
+✅ Important: Never push your .env file to GitHub. It is ignored via .gitignore.
+
+🧪 Run the App
 bash
 Copy code
-streamlit run app.py
-🧪 Example Queries
-“What are the effects of rising sea levels?”
+streamlit run streamlit_app.py
+Then open http://localhost:8501 in your browser.
 
-“How does deforestation affect the environment?”
+🧠 How It Works
+User enters a natural language question.
 
-“What are the benefits of renewable energy?”
+App fetches real-time web results from SerpAPI.
 
-⚙️ How It Works
-Dataset Loading: SemanticSearch loads the CSV and merges the title + description.
+Text from results is embedded using a SentenceTransformer model.
 
-Text Embedding: Converts text into vectors using SentenceTransformer.
+FAISS indexes and finds the most semantically similar snippet to the query.
 
-Query Embedding: Same model encodes the user's query.
+The best match is returned and shown to the user.
 
-Similarity Search: Uses cosine similarity with FAISS to retrieve top results.
+📁 Project Structure
+bash
+Copy code
+.
+├── app.py
+├── generate_embeddings.py
+├── search_engine.py
+├── streamlit_app.py
+├── utils.py
+├── requirements.txt
+├── .env              # contains SerpAPI key (not committed)
+├── .gitignore
+└── README.md
+📌 To-Do
+ Add OpenAI/GPT summarization of results (optional)
 
-Display: Streamlit shows the results interactively.
+ Add multi-page result interface
 
-🧾 Dependencies
-streamlit
+ Cache frequent queries
 
-pandas
+🛡️ License
+This project is open-source and available under the MIT License.
 
-scikit-learn
+🙋‍♂️ Author
+Shahil Sinha
 
-sentence-transformers
-
-faiss-cpu
-
-📈 To Do / Future Enhancements
- Add category/date filters
-
- Support multiple datasets
-
- GPT-powered answer summarization
-
- Public deployment on Streamlit Cloud or Heroku
-
-📢 Contributing
-Fork the repo, create a branch, and open a pull request. Suggestions and issues are welcome!
-
-📄 License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-🏷️ Tags
-#AI #MachineLearning #SemanticSearch #NLP #Streamlit #ClimateChange #DataScience
+Feel free to reach out on LinkedIn or contribute to this repo!
