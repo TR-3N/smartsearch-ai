@@ -1,25 +1,31 @@
-
-from sentence_transformers import SentenceTransformer
-import faiss
-import numpy as np
-import pandas as pd
+import os
+import requests
 
 class SemanticSearch:
-    def __init__(self, data_path):
-        self.model = SentenceTransformer('all-MiniLM-L6-v2')
-        self.data = pd.read_csv(data_path)
-        self.corpus = self.data['description'].tolist()
-        self.corpus_embeddings = self.model.encode(self.corpus, convert_to_numpy=True)
-        self.index = faiss.IndexFlatL2(self.corpus_embeddings[0].shape[0])
-        self.index.add(self.corpus_embeddings)
+    def __init__(self):
+        self.api_key = os.getenv("SERPAPI_KEY")
+        if not self.api_key:
+            raise ValueError("SERPAPI_KEY not found in environment variables")
 
-    def search(self, query, top_k=3):
-        query_embedding = self.model.encode([query], convert_to_numpy=True)
-        distances, indices = self.index.search(query_embedding, top_k)
-        results = []
-        for idx in indices[0]:
-            results.append({
-                'title': self.data.iloc[idx]['title'],
-                'description': self.data.iloc[idx]['description']
-            })
-        return results
+    def search(self, query, top_k=5):
+        params = {
+            "q": query,
+            "api_key": self.api_key,
+            "engine": "google",
+            "num": top_k
+        }
+
+        response = requests.get("https://serpapi.com/search", params=params)
+
+        if response.status_code != 200:
+            return [{"error": f"API call failed: {response.status_code}"}]
+
+        results = response.json().get("organic_results", [])
+        formatted = [{
+            "name": item.get("title", "No Title"),
+            "description": item.get("snippet", "No description available."),
+            "link": item.get("link", "#"),
+            "score": 1.0
+        } for item in results]
+
+        return formatted

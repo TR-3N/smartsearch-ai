@@ -1,5 +1,10 @@
-sentence-transformers
-faiss-cpu
-pandas
 streamlit
+pandas
+numpy
+openai
 scikit-learn
+flask
+flask-cors
+python-dotenv
+requests
+
