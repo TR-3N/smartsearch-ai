@@ -1,0 +1,10 @@
+# created by virtualenv automatically
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.npy
+*.csv
+.DS_Store
+smartsearch_env/
