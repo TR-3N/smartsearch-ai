@@ -7,5 +7,8 @@ flask
 flask-cors
 python-dotenv
 requests
+<<<<<<< HEAD
 sentence-transformers
+=======
+>>>>>>> 48830c8111dbe6364d62af83882cd55471dcb357
 
